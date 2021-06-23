@@ -5,10 +5,10 @@ import { Directive, HostBinding, HostListener } from '@angular/core';
 })
 export class ActiveRecipeDirective {
   @HostBinding('class.active') isOpen: boolean = false;
-  @HostListener('click') toggleOpen() {
+  @HostListener('mouseenter') isMouseEnter() {
     this.isOpen = true;
-    setTimeout(() => {
-      this.isOpen = false;
-    }, 500);
+  }
+  @HostListener('mouseleave') isMouseLeave() {
+    this.isOpen = false;
   }
 }
