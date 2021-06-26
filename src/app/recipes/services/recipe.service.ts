@@ -8,20 +8,7 @@ import { Recipe } from '../recipe.model';
 @Injectable()
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
-  private recipes: Recipe[] = [
-    new Recipe(
-      'A test recipe',
-      'This is a test',
-      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=768,574',
-      [new Ingredient('Apple', 5), new Ingredient('Banana', 3)]
-    ),
-    new Recipe(
-      'Another test recipe',
-      'This is a test',
-      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=768,574',
-      [new Ingredient('Apple', 10), new Ingredient('Banana', 5)]
-    ),
-  ];
+  private recipes: Recipe[] = [];
 
   constructor(private slService: ShoppingListService) {}
   podCastRecipes() {
@@ -49,6 +36,10 @@ export class RecipeService {
   }
   deleteRecipe(index: number) {
     this.recipes.splice(index, 1);
+    this.podCastRecipes();
+  }
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
     this.podCastRecipes();
   }
 }
